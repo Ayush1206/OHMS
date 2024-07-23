@@ -4,6 +4,7 @@ import { PolarArea } from 'react-chartjs-2';
 import { AddEmployee, Admin, SidebarAdmin } from '..';
 import FeeManagement from './FeeManagment.component';
 import Settings from './Settings.component';
+import AddStudents from './AddStudents.components';
 
 
 const ProfileHome = () => {
@@ -19,6 +20,8 @@ const ProfileHome = () => {
             return <FeeManagement />;
           case 'AddEmployee':
             return <AddEmployee />;
+          case 'AddStudents':
+            return <AddStudents />
           case 'Settings':
             return <Settings />;
           default:
