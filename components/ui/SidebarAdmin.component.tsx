@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { Bars3Icon, StarIcon } from '@heroicons/react/24/solid';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
 
-const SidebarAdmin: React.FC = () => {
+interface SidebarAdminProps {
+  setActiveComponent: (componentName: string) => void;
+}
+
+const SidebarAdmin: React.FC<SidebarAdminProps> = ({ setActiveComponent }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-  const classTeacherFor = "Class 2";
-
-  const dropdownVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: 'auto' }
-  };
 
   return (
     <>
@@ -25,18 +20,43 @@ const SidebarAdmin: React.FC = () => {
       </div>
 
       <div className={`fixed top-0 left-0 h-screen w-40 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0 bg-gradient-to-b from-purple-500 via-pink-500 to-white z-10`}>
-
         <div className="text-white text-xl font-bold p-5"></div>
         <nav className="flex flex-col space-y-2">
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Home</a>
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Profile</a>
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Fee Management</a>
-
-          {/* Dropdown Toggle */}
-          
-
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Settings</a>
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Logout</a>
+          <button
+            onClick={() => setActiveComponent('Admin')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Admin
+          </button>
+          <button
+            onClick={() => setActiveComponent('UserProfile')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Profile
+          </button>
+          <button
+            onClick={() => setActiveComponent('FeeManagement')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Fee Management
+          </button>
+          <button
+            onClick={() => setActiveComponent('AddEmployee')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Add Employee
+          </button>
+          <button
+            onClick={() => setActiveComponent('Settings')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Settings
+          </button>
+          {/* <Link href="/logout" passHref>
+            <a className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">
+              Logout
+            </a>
+          </Link> */}
         </nav>
       </div>
     </>

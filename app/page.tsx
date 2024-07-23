@@ -1,6 +1,6 @@
 "use client"
 
-import { Addmission, Admin, Login, NavCompo, Userprofile } from "@/components";
+import { Addmission, Login, ProfileHome, Userprofile } from "@/components";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -15,11 +15,7 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden pt-[68px]">
-      <NavCompo onNavigate={toggleMainComponent}></NavCompo>
-      {activeComponent === "Admission" && <Addmission></Addmission>}
-      {activeComponent === "OfficeBoy" && <Userprofile></Userprofile>}
-      {activeComponent === "Admin" && <Admin></Admin>}
-      {activeComponent === "LogIn" && <Login></Login>}
+     
     </main>
   );
 }

@@ -17,10 +17,7 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsServicesOpen(false);
       }
     };
@@ -29,10 +26,10 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleToggle = (name:string) =>{
+  const handleToggle = (name: string) => {
     onNavigate(name);
-    setIsServicesOpen(!isServicesOpen)
-  }
+    setIsServicesOpen(false); // Close the dropdown after navigating
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white z-10">
@@ -42,23 +39,14 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
             OHMS
           </a>
           <div className="space-x-4 hidden sm:flex">
-            <a
-              href="#"
-              className="hover:text-gray-200 transition-colors duration-200"
-            >
+            <a href="#" className="hover:text-gray-200 transition-colors duration-200">
               Home
             </a>
-            <a
-              href="#"
-              className="hover:text-gray-200 transition-colors duration-200"
-            >
+            <a href="#" className="hover:text-gray-200 transition-colors duration-200">
               About
             </a>
             <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={toggleServicesDropdown}
-                className="hover:text-gray-200 transition-colors duration-200"
-              >
+              <button onClick={toggleServicesDropdown} className="hover:text-gray-200 transition-colors duration-200">
                 Services
               </button>
               {isServicesOpen && (
@@ -72,11 +60,9 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <a
                     href="#"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={(e) => {
-                      handleToggle("Admission")
-                    }}
+                    onClick={() => handleToggle("Admission")}
                   >
-                    Addmission form
+                    Admission Form
                   </a>
                   <a
                     href="#"
@@ -88,26 +74,21 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <a
                     href="#"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => handleToggle("Admin")}
+                    onClick={() => handleToggle("ProfileHome")}
                   >
                     Admin Profile
                   </a>
                   <a
                     href="#"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={(e) => {
-                      handleToggle("LogIn")
-                    }}
+                    onClick={() => handleToggle("LogIn")}
                   >
-                    LogIn
+                    Login
                   </a>
                 </motion.div>
               )}
             </div>
-            <a
-              href="#"
-              className="hover:text-gray-200 transition-colors duration-200"
-            >
+            <a href="#" className="hover:text-gray-200 transition-colors duration-200">
               Contact
             </a>
           </div>
@@ -115,7 +96,6 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
             Menu
           </button>
         </div>
-        {/* Mobile menu items */}
         {isMobileMenuOpen && (
           <div className="sm:hidden">
             <div className="px-4 py-2 flex flex-col">
@@ -126,54 +106,47 @@ const NavCompo: React.FC<NavbarProps> = ({ onNavigate }) => {
                 About
               </a>
               <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={toggleServicesDropdown}
-                  className="hover:text-gray-200 transition-colors duration-200"
-                >
+                <button onClick={toggleServicesDropdown} className="hover:text-gray-200 transition-colors duration-200">
                   Services
                 </button>
                 {isServicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, scaleY: 0 }}
-                  animate={{ opacity: 1, scaleY: 1 }}
-                  exit={{ opacity: 0, scaleY: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute left-0 mt-2 w-48 bg-white text-black rounded-md overflow-hidden shadow-lg"
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={(e) => {
-                      handleToggle("Admission")
-                    }}
+                  <motion.div
+                    initial={{ opacity: 0, scaleY: 0 }}
+                    animate={{ opacity: 1, scaleY: 1 }}
+                    exit={{ opacity: 0, scaleY: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute left-0 mt-2 w-48 bg-white text-black rounded-md overflow-hidden shadow-lg"
                   >
-                    Addmission form
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => handleToggle("OfficeBoy")}
-                  >
-                    User Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => handleToggle("Admin")}
-                  >
-                    Admin Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={(e) => {
-                      handleToggle("LogIn")
-                    }}
-                  >
-                    LogIn
-                  </a>
-                </motion.div>
-              )}
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => handleToggle("Admission")}
+                    >
+                      Admission Form
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => handleToggle("OfficeBoy")}
+                    >
+                      User Profile
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => handleToggle("Admin")}
+                    >
+                      Admin Profile
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => handleToggle("LogIn")}
+                    >
+                      Login
+                    </a>
+                  </motion.div>
+                )}
               </div>
               <a href="#" className="hover:text-gray-200">
                 Contact
