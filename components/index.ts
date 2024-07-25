@@ -7,6 +7,7 @@ import NavCompo from "./ui/Nav.component";
 import ProfileHome from "./ui/ProfileHome.component";
 import Sidebar from "./ui/Sidebar.component";
 import SidebarAdmin from "./ui/SidebarAdmin.component";
+import StudentDashboard from "./ui/StudentDashboard.component";
 import Userprofile from "./ui/Userprofile.component";
 
 export {
@@ -19,5 +20,6 @@ export {
     Login,
     SidebarAdmin,
     AddEmployee,
-    ProfileHome
+    ProfileHome,
+    StudentDashboard
 }

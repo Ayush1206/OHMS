@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Addmission, Admin, Login, NavCompo, ProfileHome, Userprofile } from "@/components";
+import { Addmission, Admin, Login, NavCompo, ProfileHome, StudentDashboard, Userprofile } from "@/components";
 
 const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeComponent, setActiveComponent] = useState("");
@@ -19,6 +19,7 @@ const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ child
         {activeComponent === "OfficeBoy" && <Userprofile />}
         {activeComponent === "ProfileHome" && <ProfileHome />}
         {activeComponent === "LogIn" && <Login />}
+        {activeComponent === "StudentDashboard" && <StudentDashboard />}
         {children}
       </main>
     </>
