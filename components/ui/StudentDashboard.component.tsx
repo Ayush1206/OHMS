@@ -74,6 +74,25 @@ const StudentDashboard = () => {
     // Add more months as needed
   ];
 
+  const teacherRemarksData = [
+    {
+      subject: 'English',
+      teacher: 'Imtiyaj Ali',
+      remarks: [
+        'Remark on student performance 1',
+        'Remark on student performance 2',
+      ],
+    },
+    {
+      subject: 'Maths',
+      teacher: 'Ravi Kumar',
+      remarks: [
+        'Remark on student performance 3',
+        'Remark on student performance 4',
+      ],
+    },
+  ];
+
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -127,6 +146,18 @@ const StudentDashboard = () => {
           >
             View Notes
           </button>
+          <button
+            onClick={() => setActiveTab('viewTeacherRemarks')}
+            className={`px-4 py-2 mx-2 ${activeTab === 'viewTeacherRemarks' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-600 hover:text-gray-800'}`}
+          >
+            View Teacher Remarks
+          </button>
+          <button
+            onClick={() => setActiveTab('viewPerformance')}
+            className={`px-4 py-2 mx-2 ${activeTab === 'viewPerformance' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-600 hover:text-gray-800'}`}
+          >
+            View Performance
+          </button>
         </div>
         {activeTab === 'viewGrades' ? (
           <>
@@ -166,7 +197,7 @@ const StudentDashboard = () => {
               </table>
             </div>
           </>
-        ) : (
+        ) : activeTab === 'viewNotes' ? (
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <table className="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
               <thead className="bg-gray-200 text-gray-600">
@@ -193,7 +224,28 @@ const StudentDashboard = () => {
               </tbody>
             </table>
           </div>
-        )}
+        ) : activeTab === 'viewTeacherRemarks' ? (
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            {teacherRemarksData.map((remark, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex justify-between items-center bg-gray-200 p-2 rounded-t-lg cursor-pointer">
+                  <span>{remark.subject}</span>
+                  <span>{remark.teacher}</span>
+                </div>
+                <div className="bg-gray-100 p-4 rounded-b-lg">
+                  {remark.remarks.map((r, idx) => (
+                    <p key={idx} className="mb-2">{r}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : activeTab === 'viewPerformance' ? (
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            {/* Performance Content */}
+            <p>Performance data will be displayed here.</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );
