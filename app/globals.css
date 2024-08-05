@@ -31,3 +31,51 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* Custom Calendar Styling */
+.custom-calendar {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.custom-calendar .react-calendar {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-calendar .react-calendar__navigation button {
+  font-size: 1rem;
+  color: #4a5568;
+  background: none;
+  border: none;
+  margin: 2px;
+  padding: 8px;
+}
+
+.custom-calendar .react-calendar__tile {
+  padding: 10px 6.6667px;
+  background: #edf2f7;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.custom-calendar .react-calendar__tile--active {
+  background: #63b3ed;
+  color: white;
+}
+
+.custom-calendar .react-calendar__tile:hover {
+  background: #cbd5e0;
+}
+
+.bg-blue-200 {
+  background-color: #c3dafe !important;
+}
+
+.bg-red-200 {
+  background-color: #feb2b2 !important;
+}
+
