@@ -1,4 +1,11 @@
+"use client"
+
 import React, { useState } from 'react';
+
+interface StudentDashboardProps {
+  studentId: string;
+}
+
 
 const StudentDashboard = () => {
   const [activeTab, setActiveTab] = useState('viewGrades');

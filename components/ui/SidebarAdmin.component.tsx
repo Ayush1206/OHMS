@@ -41,6 +41,12 @@ const SidebarAdmin: React.FC<SidebarAdminProps> = ({ setActiveComponent }) => {
             Fee Management
           </button>
           <button
+            onClick={() => setActiveComponent('LeaveInfo')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Leave info
+          </button>
+          <button
             onClick={() => setActiveComponent('AddEmployee')}
             className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
           >

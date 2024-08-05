@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PolarArea } from 'react-chartjs-2';
 
-import { AddEmployee, Admin, SidebarAdmin } from '..';
+import { AddEmployee, Admin, LeaveApplication, SidebarAdmin } from '..';
 import FeeManagement from './FeeManagment.component';
 import Settings from './Settings.component';
 import AddStudents from './AddStudents.components';
@@ -24,6 +24,8 @@ const ProfileHome = () => {
             return <AddStudents />
           case 'Settings':
             return <Settings />;
+          case 'LeaveInfo':
+            return <LeaveApplication />
           default:
             return <Admin />;
         }

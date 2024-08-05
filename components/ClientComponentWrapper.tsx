@@ -1,11 +1,26 @@
-// components/ClientComponentWrapper.tsx
 "use client";
 
-import React, { useState } from "react";
-import { Addmission, Admin, Login, NavCompo, ProfileHome, StudentDashboard, Userprofile } from "@/components";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; 
+import { Addmission, Login, NavCompo, ProfileHome, StudentDashboard, Userprofile } from ".";
 
 const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeComponent, setActiveComponent] = useState("");
+  const [studentId, setStudentId] = useState<string | null>(null);
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   // Check URL for student ID
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   const id = urlParams.get("studentId");
+    
+  //   if (id) {
+  //     setActiveComponent("StudentDashboard");
+  //     setStudentId(id); // Set the student ID state
+  //   } else {
+  //     setActiveComponent(""); // Reset to default if no ID
+  //   }
+  // }, [router]); // Listen to router changes
 
   const toggleMainComponent = (componentName: string) => {
     setActiveComponent(componentName);
@@ -19,7 +34,7 @@ const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ child
         {activeComponent === "OfficeBoy" && <Userprofile />}
         {activeComponent === "ProfileHome" && <ProfileHome />}
         {activeComponent === "LogIn" && <Login />}
-        {activeComponent === "StudentDashboard" && <StudentDashboard />}
+        {activeComponent === "StudentDashboard" &&  <StudentDashboard />}
         {children}
       </main>
     </>

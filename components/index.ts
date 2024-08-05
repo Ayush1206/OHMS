@@ -1,6 +1,7 @@
 import AddEmployee from "./ui/AddEmployee.component";
 import Addmission from "./ui/Addmission.component";
 import Admin from "./ui/Admin.component";
+import LeaveApplication from "./ui/LeaveApplication.component";
 import LineChartComponent from "./ui/LineChart.component";
 import Login from "./ui/Login.component";
 import NavCompo from "./ui/Nav.component";
@@ -21,5 +22,6 @@ export {
     SidebarAdmin,
     AddEmployee,
     ProfileHome,
-    StudentDashboard
+    StudentDashboard,
+    LeaveApplication
 }

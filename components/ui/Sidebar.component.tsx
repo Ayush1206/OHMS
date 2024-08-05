@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { Bars3Icon, StarIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, StarIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Sidebar: React.FC = () => {
+interface SidebarAdminProps {
+  setActiveComponent: (componentName: string) => void;
+}
+
+const Sidebar: React.FC<SidebarAdminProps> = ({ setActiveComponent }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const classTeacherFor = "Class 2";
-
-  const dropdownVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: 'auto' }
-  };
 
   return (
     <>
@@ -30,39 +29,67 @@ const Sidebar: React.FC = () => {
         <nav className="flex flex-col space-y-2">
           <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Home</a>
           <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Profile</a>
-          <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Fee Management</a>
+          <button
+            onClick={() => setActiveComponent('LeaveInfo')}
+            className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5"
+          >
+            Leave info
+          </button>
+          {/* <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Leave info</a> */}
 
-          {/* Dropdown Toggle */}
+          {/* Modal Toggle */}
           <div className="py-2 px-5">
-            <button onClick={toggleDropdown} className="text-white w-full text-left">
+            <button onClick={toggleModal} className="text-white w-full text-left">
               Classes
             </button>
-            <AnimatePresence>
-              {isDropdownOpen && (
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  variants={dropdownVariants}
-                  transition={{ duration: 0.2 }}
-                  className="flex flex-col pl-4 mt-2 space-y-2"
-                >
-                  {/* Dropdown Items */}
-                  {['Class 1', 'Class 2', 'Class 3'].map((className, index) => (
-                    <a href="#" key={index} className={`flex items-center text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out ${className === classTeacherFor ? "border-2 border-pink-500 shadow-md shadow-pink-500/50 rounded-lg" : ""}`}>
-                      {className === classTeacherFor && <StarIcon className="h-5 w-5 mr-2 text-yellow-400" />}
-                      {className}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Settings</a>
           <a href="#" className="text-white py-2 hover:text-gray-900 hover:bg-white transition duration-300 ease-in-out p-5">Logout</a>
         </nav>
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30"
+          >
+            <motion.div
+              initial={{ y: -100 }}
+              animate={{ y: 0 }}
+              exit={{ y: -100 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-lg p-6 w-96 shadow-lg relative"
+            >
+              <button
+                onClick={toggleModal}
+                className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </button>
+              <h2 className="text-lg font-bold mb-4">Select a Class</h2>
+              <div className="flex flex-col space-y-2">
+                {['Class 1', 'Class 2', 'Class 3'].map((className, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center justify-between p-4 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out ${
+                      className === classTeacherFor ? "border-2 border-pink-500 shadow-md shadow-pink-500/50 rounded-lg" : ""
+                    }`}
+                  >
+                    <span>{className}</span>
+                    {className === classTeacherFor && <StarIcon className="h-5 w-5 text-yellow-400" />}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
