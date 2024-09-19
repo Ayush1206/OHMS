@@ -28,7 +28,7 @@ const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ child
 
   return (
     <>
-      <NavCompo onNavigate={toggleMainComponent} />
+      {/* <NavCompo onNavigate={toggleMainComponent} /> */}
       <main className="overflow-hidden pt-[68px]">
         {activeComponent === "Admission" && <Addmission />}
         {activeComponent === "OfficeBoy" && <Userprofile />}

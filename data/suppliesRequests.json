@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2024-09-18T16:45:45.755Z",
+    "status": "pending",
+    "requested_by": "teacher",
+    "category": "Library",
+    "itemName": "Math by RD sharma",
+    "quantity": "2",
+    "reason": "older one got lost"
+  },
+  {
+    "id": 2,
+    "timestamp": "2024-09-18T18:11:09.772Z",
+    "status": "Rejected",
+    "requested_by": "teacher",
+    "category": "Classroom Essentials",
+    "itemName": "Chalk",
+    "quantity": "3",
+    "reason": "khatam ho gayi"
+  }
+]

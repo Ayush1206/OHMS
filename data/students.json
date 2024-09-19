@@ -1,0 +1,40 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "rollNo": "123",
+      "class": "10",
+      "section": "A",
+      "profileImage": "/images/dummy.webp",
+      "totalFee": 50000,
+      "feesPaid": 46000,
+      "feesDue": 4000,
+      "dueDate": "2023-10-15"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "rollNo": "124",
+      "class": "10",
+      "section": "A",
+      "profileImage": "/images/dummy.webp",
+      "totalFee": 50000,
+      "feesPaid": 50000,
+      "feesDue": 0,
+      "dueDate": "2023-09-30"
+    },
+    {
+      "id": 3,
+      "name": "Alice Johnson",
+      "rollNo": "125",
+      "class": "10",
+      "section": "B",
+      "profileImage": "/images/dummy.webp",
+      "totalFee": 50000,
+      "feesPaid": 25000,
+      "feesDue": 25000,
+      "dueDate": "2023-10-05"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { Addmission, Login, ProfileHome, Userprofile } from "@/components";
+// import { Addmission, Login, ProfileHome, Userprofile } from "@/components";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

@@ -1,0 +1,145 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "name": "Lab Inventory",
+        "description": "Items used in labs such as chemicals, glassware, etc.",
+        "items": [
+          {
+            "id": 101,
+            "name": "Microscope",
+            "quantity": 20,
+            "location": "Biology Lab",
+            "lastUpdated": "2023-09-15"
+          },
+          {
+            "id": 102,
+            "name": "Beakers",
+            "quantity": 50,
+            "location": "Chemistry Lab",
+            "lastUpdated": "2023-09-10"
+          },
+          {
+            "id": 103,
+            "name": "Bunsen Burner",
+            "quantity": 30,
+            "location": "Physics Lab",
+            "lastUpdated": "2023-09-12"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Classroom Essentials",
+        "description": "Supplies for classrooms such as whiteboards, markers, etc.",
+        "items": [
+          {
+            "id": 201,
+            "name": "Whiteboard",
+            "quantity": 10,
+            "location": "Room 101",
+            "lastUpdated": "2023-09-12"
+          },
+          {
+            "id": 202,
+            "name": "Markers",
+            "quantity": 100,
+            "location": "Storage Room",
+            "lastUpdated": "2023-09-18"
+          },
+          {
+            "id": 203,
+            "name": "Projector",
+            "quantity": 5,
+            "location": "Conference Room",
+            "lastUpdated": "2023-09-14"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Library",
+        "description": "Library inventory including books and digital media.",
+        "items": [
+          {
+            "id": 301,
+            "name": "Encyclopedia Set",
+            "quantity": 10,
+            "location": "Library Shelf A",
+            "lastUpdated": "2023-09-13"
+          },
+          {
+            "id": 302,
+            "name": "Kindle E-Readers",
+            "quantity": 15,
+            "location": "Library Digital Section",
+            "lastUpdated": "2023-09-17"
+          },
+          {
+            "id": 303,
+            "name": "Library Chairs",
+            "quantity": 40,
+            "location": "Library Reading Area",
+            "lastUpdated": "2023-09-18"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Sports Items",
+        "description": "Items used in sports such as balls, nets, etc.",
+        "items": [
+          {
+            "id": 401,
+            "name": "Football",
+            "quantity": 20,
+            "location": "Sports Room",
+            "lastUpdated": "2023-09-16"
+          },
+          {
+            "id": 402,
+            "name": "Basketball",
+            "quantity": 15,
+            "location": "Sports Room",
+            "lastUpdated": "2023-09-14"
+          },
+          {
+            "id": 403,
+            "name": "Volleyball Net",
+            "quantity": 5,
+            "location": "Gym Area",
+            "lastUpdated": "2023-09-13"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Books",
+        "description": "Book inventory for different subjects and levels.",
+        "items": [
+          {
+            "id": 501,
+            "name": "Mathematics for Grade 10",
+            "quantity": 30,
+            "location": "Library Shelf B",
+            "lastUpdated": "2023-09-11"
+          },
+          {
+            "id": 502,
+            "name": "Science Textbook for Grade 8",
+            "quantity": 25,
+            "location": "Library Shelf C",
+            "lastUpdated": "2023-09-17"
+          },
+          {
+            "id": 503,
+            "name": "History of India",
+            "quantity": 40,
+            "location": "Library Shelf D",
+            "lastUpdated": "2023-09-14"
+          }
+        ]
+      }
+    ]
+  }
+  
