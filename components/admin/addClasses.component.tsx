@@ -8,7 +8,12 @@ interface Section {
   strength: number;
   classTeacher?: string;
   roomNumber?: string;
+  tuitionFee: number;
+  transportationFee: number;
+  extracurricularFee: number;
+  labFee: number;
 }
+
 
 interface ClassData {
   className: string;
@@ -18,12 +23,13 @@ interface ClassData {
 const AddClass: React.FC = () => {
   const [className, setClassName] = useState<string>("");
   const [sections, setSections] = useState<Section[]>([
-    { sectionName: "", strength: 0 },
+    { sectionName: "", strength: 0, tuitionFee: 0, transportationFee: 0, extracurricularFee: 0, labFee: 0 },
   ]);
+
 
   // Handle adding a new section
   const addSection = () => {
-    setSections([...sections, { sectionName: "", strength: 0 }]);
+    setSections([...sections, { sectionName: "", strength: 0, tuitionFee: 0, transportationFee: 0, extracurricularFee: 0, labFee: 0 }]);
   };
 
   // Handle changing section values
@@ -34,14 +40,22 @@ const AddClass: React.FC = () => {
     setSections(updatedSections);
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const classData: ClassData = {
+
+    // Class data
+    const classData = {
       className,
-      sections,
+      sections: sections.map(({ tuitionFee, transportationFee, extracurricularFee, labFee, ...rest }) => ({
+        ...rest,
+        tuitionFee,
+        transportationFee,
+        extracurricularFee,
+        labFee,
+      })),
     };
+
+    console.log("logging class data:", classData);
 
     try {
       // Axios POST request to send class data to the API
@@ -54,6 +68,8 @@ const AddClass: React.FC = () => {
       alert("An error occurred while saving.");
     }
   };
+
+
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
@@ -122,6 +138,67 @@ const AddClass: React.FC = () => {
                 className="w-full border rounded p-2 mt-2"
               />
             </div>
+
+            <div className="mb-2">
+              <label className="block">Tuition Fee:</label>
+              <input
+                type="number"
+                value={section.tuitionFee}
+                onChange={(e) =>
+                  handleSectionChange(index, "tuitionFee", parseInt(e.target.value, 10))
+                }
+                className="w-full border rounded p-2 mt-2"
+                required
+              />
+            </div>
+
+            <div className="mb-2">
+              <label className="block">Transportation Fee:</label>
+              <input
+                type="number"
+                value={section.transportationFee}
+                onChange={(e) =>
+                  handleSectionChange(index, "transportationFee", parseInt(e.target.value, 10))
+                }
+                className="w-full border rounded p-2 mt-2"
+                required
+              />
+            </div>
+
+            <div className="mb-2">
+              <label className="block">Extracurricular Fee:</label>
+              <input
+                type="number"
+                value={section.extracurricularFee}
+                onChange={(e) =>
+                  handleSectionChange(index, "extracurricularFee", parseInt(e.target.value, 10))
+                }
+                className="w-full border rounded p-2 mt-2"
+                required
+              />
+            </div>
+
+            <div className="mb-2">
+              <label className="block">Lab Fee:</label>
+              <input
+                type="number"
+                value={section.labFee}
+                onChange={(e) =>
+                  handleSectionChange(index, "labFee", parseInt(e.target.value, 10))
+                }
+                className="w-full border rounded p-2 mt-2"
+                required
+              />
+            </div>
+
+            <div className="mt-4">
+              <h3 className="text-lg font-bold">
+                Total Fee Per Student: ₹
+                {section.tuitionFee + section.transportationFee + section.extracurricularFee + section.labFee}
+              </h3>
+            </div>
+
+
           </div>
         ))}
 
@@ -140,7 +217,7 @@ const AddClass: React.FC = () => {
             type="reset"
             onClick={() => {
               setClassName("");
-              setSections([{ sectionName: "", strength: 0 }]);
+              setSections([{ sectionName: "", strength: 0, tuitionFee: 0, transportationFee: 0, extracurricularFee: 0, labFee: 0 }]);
             }}
             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
           >

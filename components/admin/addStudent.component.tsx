@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const COLORS = {
   william: "#3b5b6a",
@@ -11,6 +12,9 @@ const COLORS = {
 };
 
 const AddStudentForm: React.FC = () => {
+  const [classList, setClassList] = useState<any[]>([]); // Initialize with an empty array
+  const [loading, setLoading] = useState<boolean>(true);
+
   const [formData, setFormData] = useState({
     firstName: "",
     middleName: "",
@@ -69,6 +73,24 @@ const AddStudentForm: React.FC = () => {
       guardianEmail: "",
     });
   };
+
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await axios.get("/api/classesFee");
+        console.log("the classes are: ",response);
+        
+        setClassList(response.data.result || []); // Default to an empty array if no result
+        setLoading(false); // Stop loading when data is fetched
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+        setLoading(false); // Stop loading even on error
+      }
+    };
+
+    fetchClasses();
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg mt-8">
@@ -175,17 +197,31 @@ const AddStudentForm: React.FC = () => {
         <div>
           <h2 className="text-xl font-semibold mb-4" style={{ color: COLORS.william }}>Class & Section</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <select
-              name="assignedClass"
-              value={formData.assignedClass}
-              onChange={handleChange}
-              className="p-3 border rounded"
-            >
-              <option value="">Select Class</option>
-              <option value="Class 1">Class 1</option>
-              <option value="Class 2">Class 2</option>
-              {/* Add more options as needed */}
-            </select>
+            <div>
+              {loading ? (
+                <p>Loading classes...</p> // Loading text while fetching
+              ) : (
+                <select name="assignedClass" className="p-3 border rounded">
+                  <option value="">Select Class</option>
+                  {classList.length > 0 ? ( // Now safe to check length
+                    classList.map((classItem) => (
+                      <optgroup key={classItem.className} label={classItem.className}>
+                        {classItem.sections.map((section: any) => (
+                          <option
+                            key={section.sectionName}
+                            value={`${classItem.className}-${section.sectionName}`}
+                          >
+                            {classItem.className} - {section.sectionName}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))
+                  ) : (
+                    <option>No classes available</option> // Fallback if no classes
+                  )}
+                </select>
+              )}
+            </div>
             <select
               name="section"
               value={formData.section}

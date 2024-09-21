@@ -1,0 +1,28 @@
+{
+  "fees": [
+    {
+      "classId": "703a132b-62b1-43ea-8d23-2d707dda78ad",
+      "fees": [
+        {
+          "sectionName": "A",
+          "tuitionFee": 1500,
+          "transportationFee": 300,
+          "extracurricularFee": 400,
+          "labFee": 400
+        }
+      ]
+    },
+    {
+      "classId": "1ff324e3-badb-4ae4-92bd-e4755bd08392",
+      "fees": [
+        {
+          "sectionName": "A",
+          "tuitionFee": 30000,
+          "transportationFee": 5000,
+          "extracurricularFee": 2000,
+          "labFee": 25000
+        }
+      ]
+    }
+  ]
+}

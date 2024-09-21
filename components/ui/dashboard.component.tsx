@@ -4,7 +4,6 @@ import React, { useState } from "react";
 
 import { Classes, ClassReport, CreateExam, LeaveApplication, MyCalendar, MySchedule, Profile, TeacherSidebar, UpdateMarks } from "../teacher";
 import { FaCheckCircle } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 
 // Define the color palette based on your theme

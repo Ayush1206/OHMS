@@ -1,70 +1,26 @@
 {
   "classes": [
     {
+      "id": "703a132b-62b1-43ea-8d23-2d707dda78ad",
       "className": "Class 10",
       "sections": [
         {
           "sectionName": "A",
-          "strength": 30,
-          "classTeacher": "Mr. Sharma",
-          "roomNumber": "101"
-        },
-        {
-          "sectionName": "B",
-          "strength": 25,
-          "classTeacher": "Ms. Patel",
-          "roomNumber": "102"
-        }
-      ]
-    },
-    {
-      "className": "Class 8",
-      "sections": [
-        {
-          "sectionName": "A",
           "strength": 50,
-          "classTeacher": "Ramesh chandra",
-          "roomNumber": "201"
-        },
-        {
-          "sectionName": "B",
-          "strength": 55,
-          "classTeacher": "Mahesh da",
-          "roomNumber": "202"
+          "classTeacher": null,
+          "roomNumber": null
         }
       ]
     },
     {
+      "id": "1ff324e3-badb-4ae4-92bd-e4755bd08392",
       "className": "Class 6",
       "sections": [
         {
           "sectionName": "A",
-          "strength": 50,
-          "classTeacher": "Ramesh chandra",
-          "roomNumber": "201"
-        },
-        {
-          "sectionName": "B",
-          "strength": 55,
-          "classTeacher": "Mahesh da",
-          "roomNumber": "202"
-        }
-      ]
-    },
-    {
-      "className": "Class 2",
-      "sections": [
-        {
-          "sectionName": "A",
-          "strength": 20,
-          "classTeacher": "Ramesh",
-          "roomNumber": "205"
-        },
-        {
-          "sectionName": "b",
-          "strength": 10,
-          "classTeacher": "Random",
-          "roomNumber": "200"
+          "strength": 60,
+          "classTeacher": null,
+          "roomNumber": null
         }
       ]
     }

@@ -1,5 +1,3 @@
-// components/common/FeePieChart.tsx
-
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -21,6 +19,11 @@ interface Student {
   dueDate: string;
 }
 
+// Define the structure of the API response
+interface ApiResponse {
+  students: Student[];
+}
+
 const FeePieChart: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [totalFees, setTotalFees] = useState<number>(0);
@@ -31,7 +34,7 @@ const FeePieChart: React.FC = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await axios.get("/api/students");
+        const response = await axios.get<ApiResponse>("/api/students");
         const data = response.data.students;
         setStudents(data);
 
@@ -77,14 +80,14 @@ const FeePieChart: React.FC = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top",
+        position: "top" as const, // Add 'as const' to ensure TypeScript knows this value won't change
       },
       tooltip: {
         callbacks: {
-          label: function (tooltipItem: any) {
-            const label = tooltipItem.label || "";
-            const value = tooltipItem.raw || 0;
-            return `${label}: ₹${value}`;
+          label: function (context: any) {
+            const label = context.label || "";
+            const value = context.raw || 0;
+            return `${label}: ₹${value.toLocaleString()}`;
           },
         },
       },

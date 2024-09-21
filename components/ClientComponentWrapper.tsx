@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"; 
-import { Addmission, Login, NavCompo, ProfileHome, StudentDashboard, Userprofile } from ".";
 
 const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeComponent, setActiveComponent] = useState("");
@@ -30,11 +29,7 @@ const ClientComponentWrapper: React.FC<{ children: React.ReactNode }> = ({ child
     <>
       {/* <NavCompo onNavigate={toggleMainComponent} /> */}
       <main className="overflow-hidden pt-[68px]">
-        {activeComponent === "Admission" && <Addmission />}
-        {activeComponent === "OfficeBoy" && <Userprofile />}
-        {activeComponent === "ProfileHome" && <ProfileHome />}
-        {activeComponent === "LogIn" && <Login />}
-        {activeComponent === "StudentDashboard" &&  <StudentDashboard />}
+        
         {children}
       </main>
     </>
