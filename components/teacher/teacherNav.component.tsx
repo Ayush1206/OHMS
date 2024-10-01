@@ -1,4 +1,18 @@
 import React, { useState } from 'react'
+import {
+    FaCog,
+    FaCalendarAlt,
+    FaBell,
+    FaUserCircle,
+    FaChalkboardTeacher,
+    FaRegCalendarCheck,
+    FaClipboardCheck,
+    FaPen,
+    FaBox
+} from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+
 
 const COLORS = {
     porcelain: "#f0f1f2",
@@ -7,16 +21,20 @@ const COLORS = {
     burntSienna: "#eb6042",
     porsche: "#e5aa5d",
     softGrey: "#8a9ba8",
-  };
+};
 
-const NavBar = () => {
-    const [activeComponent, setActiveComponent] = useState<string>("profile");
+
+const TeacherNav = () => {
+
+    const [activeComponent, setActiveComponent] = useState<string>("calendar");
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+
 
     return (
         <>
             <div
-                className="fixed w-[90%] md:w-[95%] top-0 flex justify-between items-center px-6 py-3 z-10"
+                className="fixed w-[90%] md:w-[85%] top-0 flex justify-between items-center px-6 py-3 z-10"
                 style={{ backgroundColor: COLORS.darkerPorcelain }}
             >
                 <h1
@@ -56,7 +74,7 @@ const NavBar = () => {
                     </button>
                 </div>
             </div>
-            <hr className="border-t-2 border-softGrey fixed w-[90%] md:w-[95%] top-16" />
+            <hr className="border-t-2 border-softGrey fixed w-[90%] md:w-[85%] top-16" />
 
             {showMobileMenu && (
           <div className="absolute top-16 left-[10%] md:left-[15%] w-[90%] md:w-[85%] bg-white text-softGrey flex flex-col items-center z-20 shadow-lg">
@@ -83,6 +101,6 @@ const NavBar = () => {
 
         </>
     );
-}
+};
 
-export default NavBar
+export default TeacherNav

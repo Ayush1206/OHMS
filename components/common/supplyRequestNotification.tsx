@@ -29,9 +29,9 @@ const SuppliesRequests: React.FC = () => {
     try {
       const response = await axios.get("/api/supplies-request");
       console.log("below is data");
-      
+
       console.log(response);
-      
+
       setRequests(response.data.requests);
     } catch (error) {
       console.error("Error fetching requests:", error);
@@ -42,13 +42,13 @@ const SuppliesRequests: React.FC = () => {
   const handleApprove = async (id: number) => {
     try {
       console.log(`Request ${id} approved`);
-      
+
       // Send a POST request to update the status of the request
       const response = await axios.put("/api/supplies-request", {
         id: id,
         status: "Approved"
       });
-      
+
       if (response.status === 200) {
         console.log(`Request ${id} has been approved successfully.`);
       } else {
@@ -58,29 +58,29 @@ const SuppliesRequests: React.FC = () => {
       console.error("Error approving the request:", error);
     }
   };
-  
+
 
   const handleReject = async (id: number) => {
     console.log(`Request ${id} rejected`);
     try {
-        console.log(`Request ${id} approved`);
-        
-        // Send a POST request to update the status of the request
-        const response = await axios.put("/api/supplies-request", {
-          id: id,
-          status: "Rejected"
-        });
-        
-        if (response.status === 200) {
-          console.log(`Request ${id} has been rejected successfully.`);
+      console.log(`Request ${id} approved`);
 
-          fetchRequests();
-        } else {
-          console.error(`Failed to Reject request ${id}.`);
-        }
-      } catch (error) {
-        console.error("Error rejecting the request:", error);
+      // Send a POST request to update the status of the request
+      const response = await axios.put("/api/supplies-request", {
+        id: id,
+        status: "Rejected"
+      });
+
+      if (response.status === 200) {
+        console.log(`Request ${id} has been rejected successfully.`);
+
+        fetchRequests();
+      } else {
+        console.error(`Failed to Reject request ${id}.`);
       }
+    } catch (error) {
+      console.error("Error rejecting the request:", error);
+    }
   };
 
   return (
@@ -107,15 +107,15 @@ const SuppliesRequests: React.FC = () => {
           </h3>
           <p className="text-sm mb-2">Quantity: {request.quantity}</p>
           <p className="text-sm mb-4">Requested by: {request.requested_by}</p>
-          <div className="flex justify-between">
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
             <button
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center"
               onClick={() => handleApprove(request.id)}
             >
               <FaCheck className="mr-2" /> Approve
             </button>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center justify-center"
               onClick={() => handleReject(request.id)}
             >
               <FaTimes className="mr-2" /> Reject
@@ -124,6 +124,7 @@ const SuppliesRequests: React.FC = () => {
         </div>
       ))}
     </div>
+
   );
 };
 

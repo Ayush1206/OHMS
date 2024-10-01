@@ -32,8 +32,6 @@ const totalLeaves = 30;
 const usedLeaves = 10;
 const remainingLeaves = totalLeaves - usedLeaves;
 
-
-
 const LeaveApplication = () => {
   const [leaveType, setLeaveType] = useState<string>("");
   const [dateRange, setDateRange] = useState<{ start: string; end: string }>({
@@ -73,10 +71,13 @@ const LeaveApplication = () => {
   };
 
   return (
-    <div className="flex p-8 space-x-8" style={{ backgroundColor: COLORS.porcelain }}>
+    <div
+      className="flex flex-col lg:flex-row p-4 space-y-4 lg:space-y-0 lg:space-x-8"
+      style={{ backgroundColor: COLORS.porcelain }}
+    >
       {/* Left Side - Leave Application */}
-      <div className="w-1/2 bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6">Apply for Leave</h2>
+      <div className="w-full lg:w-1/2 bg-white p-4 rounded-lg shadow-lg">
+        <h2 className="text-xl lg:text-2xl font-bold mb-4">Apply for Leave</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Leave Type</label>
@@ -93,18 +94,18 @@ const LeaveApplication = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Date Range</label>
-            <div className="flex space-x-4">
+            <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
               <input
                 type="date"
                 value={dateRange.start}
                 onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-                className="w-1/2 border p-2 rounded"
+                className="w-full lg:w-1/2 border p-2 rounded"
               />
               <input
                 type="date"
                 value={dateRange.end}
                 onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-                className="w-1/2 border p-2 rounded"
+                className="w-full lg:w-1/2 border p-2 rounded"
               />
             </div>
           </div>
@@ -121,21 +122,21 @@ const LeaveApplication = () => {
             <label className="block text-sm font-bold mb-2">Supporting Documents</label>
             <input type="file" onChange={handleFileChange} className="w-full border p-2 rounded" />
           </div>
-          <button type="submit" className="bg-burntSienna text-white px-4 py-2 rounded">
+          <button type="submit" className="bg-burntSienna text-white px-4 py-2 rounded w-full lg:w-auto">
             Submit
           </button>
         </form>
       </div>
 
       {/* Right Side - Leave and Holiday Calendar */}
-      <div className="w-1/2 bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Leave Calendar</h2>
+      <div className="w-full lg:w-1/2 bg-white p-4 rounded-lg shadow-lg">
+        <h2 className="text-xl lg:text-2xl font-bold mb-4">Leave Calendar</h2>
         <div className="mb-4">
           <p>
             Total Leaves: {totalLeaves} | Used: {usedLeaves} | Remaining: {remainingLeaves}
           </p>
         </div>
-        <div className="border rounded-lg shadow p-4" style={{ backgroundColor: COLORS.porcelain }}>
+        <div className="border rounded-lg shadow p-4 overflow-x-auto" style={{ backgroundColor: COLORS.porcelain }}>
           <h3 className="font-semibold mb-2">Leave Records</h3>
           <table className="min-w-full bg-white rounded-lg shadow-md">
             <thead>
@@ -160,7 +161,7 @@ const LeaveApplication = () => {
         </div>
 
         {/* Holiday Calendar Section */}
-        <div className="mt-6 border rounded-lg shadow p-4" style={{ backgroundColor: COLORS.porcelain }}>
+        <div className="mt-6 border rounded-lg shadow p-4 overflow-x-auto" style={{ backgroundColor: COLORS.porcelain }}>
           <h3 className="font-semibold mb-2">Holiday Calendar</h3>
           <table className="min-w-full bg-white rounded-lg shadow-md">
             <thead>
@@ -184,6 +185,6 @@ const LeaveApplication = () => {
       </div>
     </div>
   );
-}
+};
 
-export default LeaveApplication
+export default LeaveApplication;

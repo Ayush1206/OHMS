@@ -1,5 +1,3 @@
-// components/DefaulterList.tsx
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -65,13 +63,13 @@ const DefaulterList: React.FC = () => {
   return (
     <div className="p-4">
       {/* Filter and Search Bar */}
-      <div className="flex justify-between mb-4">
-        <div>
+      <div className="flex flex-col md:flex-row justify-between mb-4">
+        <div className="mb-4 md:mb-0">
           <label className="mr-2">Filter by Class:</label>
           <select
             value={selectedClass}
             onChange={(e) => setSelectedClass(e.target.value)}
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full md:w-auto"
           >
             <option value="All">All</option>
             <option value="10">Class 10</option>
@@ -86,7 +84,7 @@ const DefaulterList: React.FC = () => {
             value={searchRollNo}
             onChange={(e) => setSearchRollNo(e.target.value)}
             placeholder="Search by Roll No"
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full md:w-auto"
           />
         </div>
       </div>
@@ -99,12 +97,12 @@ const DefaulterList: React.FC = () => {
           {filteredDefaulters.map((student) => (
             <div
               key={student.id}
-              className="border p-4 rounded-lg shadow-lg flex"
+              className="border p-4 rounded-lg shadow-lg flex flex-col sm:flex-row"
             >
               <img
                 src={student.profileImage}
                 alt={student.name}
-                className="h-16 w-16 rounded-full mr-4"
+                className="h-16 w-16 rounded-full mr-4 mb-4 sm:mb-0"
               />
               <div>
                 <p><strong>Name:</strong> {student.name}</p>

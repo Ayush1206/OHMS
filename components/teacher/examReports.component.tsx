@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import PieChart from "../common/pieChart"; // Assuming this is a valid component
-import CombinedCharts from "../common/pieChart"; // Corrected import to avoid duplicate import of PieChart
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx"; // For XLSX/CSV
 import jsPDF from "jspdf"; // For PDF
 import html2canvas from "html2canvas";
+import CombinedCharts from "../common/pieChart";
 
 // Types for the top scorers and class reports data
 type TopScorer = {
@@ -57,13 +56,10 @@ const ClassReport: React.FC = () => {
     XLSX.utils.book_append_sheet(wb, ws, "Report");
 
     const fileName = `class-report.${format}`;
-    
-    // Cast the format to XLSX.BookType to ensure compatibility
     const buffer = XLSX.write(wb, { bookType: format as XLSX.BookType, type: "array" });
-    
     const blob = new Blob([buffer], { type: "application/octet-stream" });
     saveAs(blob, fileName);
-};
+  };
 
   const downloadPDF = () => {
     const doc = new jsPDF();
@@ -76,7 +72,6 @@ const ClassReport: React.FC = () => {
     });
   };
 
-  // Function to download as JPEG
   const downloadJPEG = () => {
     html2canvas(document.body).then((canvas) => {
       const link = document.createElement("a");
@@ -103,115 +98,98 @@ const ClassReport: React.FC = () => {
     }
   };
 
-  // Function to render table content based on active tab
   const renderTable = () => {
     if (activeTab === "topScorers") {
       return (
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Roll No</th>
-              <th className="px-4 py-2 border">Class</th>
-              <th className="px-4 py-2 border">Marks</th>
-              <th className="px-4 py-2 border">Rank</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topScorers.map((student, index) => (
-              <tr key={index}>
-                <td className="px-4 py-2 border">{student.name}</td>
-                <td className="px-4 py-2 border">{student.rollNo}</td>
-                <td className="px-4 py-2 border">{student.class}</td>
-                <td className="px-4 py-2 border">{student.marks}</td>
-                <td className="px-4 py-2 border">{student.rank}</td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border">Name</th>
+                <th className="px-4 py-2 border">Roll No</th>
+                <th className="px-4 py-2 border">Class</th>
+                <th className="px-4 py-2 border">Marks</th>
+                <th className="px-4 py-2 border">Rank</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {topScorers.map((student, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-2 border">{student.name}</td>
+                  <td className="px-4 py-2 border">{student.rollNo}</td>
+                  <td className="px-4 py-2 border">{student.class}</td>
+                  <td className="px-4 py-2 border">{student.marks}</td>
+                  <td className="px-4 py-2 border">{student.rank}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     } else {
       const classData = classReports[activeTab];
       return (
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Roll No</th>
-              <th className="px-4 py-2 border">Marks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {classData.map((student, index) => (
-              <tr key={index}>
-                <td className="px-4 py-2 border">{student.name}</td>
-                <td className="px-4 py-2 border">{student.rollNo}</td>
-                <td className="px-4 py-2 border">{student.marks}</td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border">Name</th>
+                <th className="px-4 py-2 border">Roll No</th>
+                <th className="px-4 py-2 border">Marks</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {classData.map((student, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-2 border">{student.name}</td>
+                  <td className="px-4 py-2 border">{student.rollNo}</td>
+                  <td className="px-4 py-2 border">{student.marks}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     }
   };
 
   return (
-    <div className="p-6 relative">
-      {/* Download options */}
-      <div className="absolute top-0 right-0 flex items-center space-x-2 mt-4 mr-4">
-        <label className="font-semibold">Download as:</label>
-        <select
-          value={selectedFormat}
-          onChange={(e) => setSelectedFormat(e.target.value)}
-          className="border rounded p-2"
-        >
-          <option value="csv">CSV</option>
-          <option value="xlsx">XLSX</option>
-          <option value="pdf">PDF</option>
-          <option value="jpeg">JPEG</option>
-        </select>
-        <button
-          onClick={handleDownload}
-          className="bg-burntSienna text-white px-4 py-2 rounded hover:bg-william"
-        >
-          Download Report
-        </button>
-      </div>
+    <div className="p-6">
+      {/* Class Selection and Download Options */}
+      <div className="flex flex-col sm:flex-row sm:justify-between mb-4">
+        <div className="flex flex-col mb-4 sm:mb-0">
+          <label className="font-semibold mb-2">Select Report</label>
+          <select
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value)}
+            className="border rounded p-2"
+          >
+            <option value="topScorers">Top Scorers</option>
+            <option value="Class A">Class A</option>
+            <option value="Class B">Class B</option>
+            <option value="Class C">Class C</option>
+          </select>
+        </div>
 
-      {/* Tab navigation */}
-      <div className="flex space-x-4 mb-4">
-        <button
-          onClick={() => setActiveTab("topScorers")}
-          className={`px-4 py-2 ${
-            activeTab === "topScorers" ? "bg-burntSienna text-white" : "bg-william text-white"
-          }`}
-        >
-          Top Scorers
-        </button>
-        <button
-          onClick={() => setActiveTab("Class A")}
-          className={`px-4 py-2 ${
-            activeTab === "Class A" ? "bg-burntSienna text-white" : "bg-william text-white"
-          }`}
-        >
-          Class A
-        </button>
-        <button
-          onClick={() => setActiveTab("Class B")}
-          className={`px-4 py-2 ${
-            activeTab === "Class B" ? "bg-burntSienna text-white" : "bg-william text-white"
-          }`}
-        >
-          Class B
-        </button>
-        <button
-          onClick={() => setActiveTab("Class C")}
-          className={`px-4 py-2 ${
-            activeTab === "Class C" ? "bg-burntSienna text-white" : "bg-william text-white"
-          }`}
-        >
-          Class C
-        </button>
+        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+          <label className="font-semibold">Download as:</label>
+          <select
+            value={selectedFormat}
+            onChange={(e) => setSelectedFormat(e.target.value)}
+            className="border rounded p-2"
+          >
+            <option value="csv">CSV</option>
+            <option value="xlsx">XLSX</option>
+            <option value="pdf">PDF</option>
+            <option value="jpeg">JPEG</option>
+          </select>
+          <button
+            onClick={handleDownload}
+            className="bg-burntSienna text-white px-4 py-2 rounded hover:bg-william w-full sm:w-auto"
+          >
+            Download Report
+          </button>
+        </div>
       </div>
 
       {/* Table Content */}

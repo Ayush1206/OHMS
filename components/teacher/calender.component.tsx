@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaPlus, FaCalendarDay, FaCalendarWeek, FaCalendarAlt } from "react-icons/fa";
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay } from "date-fns";
 import AddEventModal from "../common/addEventForm";
+
 // Define the color palette based on your theme
 const COLORS = {
   porcelain: "#f0f1f2",
@@ -21,16 +22,14 @@ interface Event {
   type: string;
   description: string;
   date: Date;
-  // time: string; // Add this line
 }
+
 const MyCalendar: React.FC = () => {
   const [viewMode, setViewMode] = useState("month");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<Event[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [time, setTime] = useState("");
-
-
 
   const changeViewMode = (mode: string) => {
     setViewMode(mode);
@@ -61,7 +60,6 @@ const MyCalendar: React.FC = () => {
     setEvents([...events, newEvent]);
   };
 
-
   // Function to render events (placeholder)
   const renderEvents = (events: Event[]) => {
     return events.map((event) => (
@@ -74,7 +72,7 @@ const MyCalendar: React.FC = () => {
   return (
     <div className="p-6" style={{ backgroundColor: COLORS.porcelain }}>
       {/* Calendar Navigation */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
         <div className="flex items-center">
           <button onClick={handlePrevious} className="mr-4 hover:text-burntSienna">
             <FaChevronLeft size={20} />
@@ -86,7 +84,7 @@ const MyCalendar: React.FC = () => {
             <FaChevronRight size={20} />
           </button>
         </div>
-        <div>
+        <div className="flex flex-col md:flex-row gap-2">
           <button
             onClick={() => changeViewMode("day")}
             className={`mr-2 ${viewMode === "day" ? "text-burntSienna" : "text-william"} hover:text-burntSienna`}
@@ -142,7 +140,7 @@ const WeekView: React.FC<{ events: Event[] }> = ({ events }) => {
   return (
     <div>
       <h2 className="text-xl font-bold text-william mb-4">Week View</h2>
-      <div className="grid grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-7 gap-4">
         {Array.from({ length: 7 }).map((_, index) => (
           <div key={index} className="bg-white p-4 rounded shadow">
             <h3 className="font-semibold">Day {index + 1}</h3>
@@ -163,7 +161,7 @@ const MonthView: React.FC<{ events: Event[]; currentDate: Date }> = ({ events, c
   return (
     <div>
       <h2 className="text-xl font-bold text-william mb-4">Month View</h2>
-      <div className="grid grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-7 gap-4">
         {days.map((day) => (
           <div key={day.toString()} className="bg-white p-4 rounded shadow">
             <h3 className="font-semibold">{format(day, "d")}</h3>
@@ -174,10 +172,10 @@ const MonthView: React.FC<{ events: Event[]; currentDate: Date }> = ({ events, c
                   <div
                     key={event.id}
                     className="bg-porsche p-2 rounded shadow mb-2 cursor-pointer"
-                    title={event.description} // Show description on hover
+                    title={event.description}
                     style={{ backgroundColor: COLORS.porsche }}
                   >
-                    {event.title} - {format(event.date, "HH:mm")} {/* Display time */}
+                    {event.title} - {format(event.date, "HH:mm")}
                   </div>
                 ))}
             </div>

@@ -49,46 +49,50 @@ const UpdateMarks: React.FC = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">Update Marks</h2>
-      <table className="min-w-full bg-white border-collapse">
-        <thead>
-          <tr>
-            <th className="border p-4 text-left">Name</th>
-            <th className="border p-4 text-left">Roll No</th>
-            <th className="border p-4 text-left">Upload Answer Sheet</th>
-            <th className="border p-4 text-left">Add Marks</th>
-          </tr>
-        </thead>
-        <tbody>
-          {studentsData.map((student) => (
-            <tr key={student.id}>
-              <td className="border p-4">{student.name}</td>
-              <td className="border p-4">{student.rollNo}</td>
-              <td className="border p-4">
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.target.files ? e.target.files[0] : null;
-                    handleFileUpload(student.id, file);
-                  }}
-                />
-              </td>
-              <td className="border p-4">
-                <input
-                  type="number"
-                  value={marks[student.id] !== undefined ? marks[student.id] : ""}
-                  onChange={(e) => handleMarksChange(student.id, e.target.value)}
-                  placeholder="Enter marks"
-                  className="border rounded p-2 w-full"
-                />
-              </td>
+      {/* Add responsive table wrapper */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border-collapse">
+          <thead>
+            <tr>
+              <th className="border p-4 text-left">Name</th>
+              <th className="border p-4 text-left">Roll No</th>
+              <th className="border p-4 text-left">Upload Answer Sheet</th>
+              <th className="border p-4 text-left">Add Marks</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {studentsData.map((student) => (
+              <tr key={student.id}>
+                <td className="border p-4">{student.name}</td>
+                <td className="border p-4">{student.rollNo}</td>
+                <td className="border p-4">
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      const file = e.target.files ? e.target.files[0] : null;
+                      handleFileUpload(student.id, file);
+                    }}
+                  />
+                </td>
+                <td className="border p-4">
+                  <input
+                    type="number"
+                    value={marks[student.id] !== undefined ? marks[student.id] : ""}
+                    onChange={(e) => handleMarksChange(student.id, e.target.value)}
+                    placeholder="Enter marks"
+                    className="border rounded p-2 w-full"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* Submit button */}
       <div className="mt-6 text-right">
         <button
           onClick={handleSubmitAll}
-          className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 w-full sm:w-auto"
         >
           Submit All
         </button>

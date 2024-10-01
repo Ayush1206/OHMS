@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaCalendarDay, FaCalendarWeek, FaCalendarAlt } from "react-icons/fa"; 
 import { format, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths } from "date-fns";
-import { FaCalendarDay, FaCalendarWeek, FaCalendarAlt } from "react-icons/fa"; // Import icons
-
 
 // Define the color palette based on your theme
 const COLORS = {
@@ -28,7 +26,6 @@ interface ClassSchedule {
 const sampleClasses: ClassSchedule[] = [
   { id: 1, title: "Maths", date: new Date(), time: "10:00 AM - 11:00 AM", room: "Room 201" },
   { id: 2, title: "Physics", date: new Date(), time: "12:00 PM - 1:00 PM", room: "Room 202" },
-  // Add more sample classes
 ];
 
 const MySchedule: React.FC = () => {
@@ -84,7 +81,7 @@ const MySchedule: React.FC = () => {
   const renderClassesForWeek = () => {
     const startOfWeek = subDays(currentDate, currentDate.getDay());
     return (
-      <div className="grid grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
         {Array.from({ length: 7 }).map((_, index) => {
           const day = addDays(startOfWeek, index);
           const dayClasses = sampleClasses.filter(
@@ -113,7 +110,7 @@ const MySchedule: React.FC = () => {
   const renderClassesForMonth = () => {
     const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     return (
-      <div className="grid grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
         {Array.from({ length: 30 }).map((_, index) => {
           const day = addDays(startOfMonth, index);
           const dayClasses = sampleClasses.filter(
@@ -142,7 +139,7 @@ const MySchedule: React.FC = () => {
   return (
     <div className="p-6" style={{ backgroundColor: COLORS.porcelain }}>
       {/* Header Section with Navigation */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
         <div className="flex items-center">
           <button onClick={handlePrevious} className="mr-4 hover:text-burntSienna">
             <FaChevronLeft size={20} />
@@ -154,7 +151,7 @@ const MySchedule: React.FC = () => {
             <FaChevronRight size={20} />
           </button>
         </div>
-        <div>
+        <div className="mt-4 sm:mt-0">
           <button
             onClick={() => setViewMode("day")}
             className={`mr-2 ${viewMode === "day" ? "text-burntSienna" : "text-william"} hover:text-burntSienna`}

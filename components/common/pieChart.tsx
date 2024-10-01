@@ -7,20 +7,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 // Register the required Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-import { FaChevronLeft, FaChevronRight, FaPlus, FaCalendarDay, FaCalendarWeek, FaCalendarAlt } from "react-icons/fa";
-import { format, addMonths, subMonths } from "date-fns";
-
-// Define the color palette based on your theme
-const COLORS = {
-  porcelain: "#f0f1f2",
-  darkerPorcelain: "#e1e3e5",
-  william: "#3b5b6a",
-  burntSienna: "#eb6042",
-  porsche: "#e5aa5d",
-  softGrey: "#8a9ba8",
-};
-
-// Placeholder for event data
+// Data remains unchanged
+// Dummy data for multiple classes
 interface Event {
   id: number;
   title: string;
@@ -87,17 +75,10 @@ const getClassAverageAndMax = (classes: Record<string, Student[]>) => {
 
   return { classNames, avgMarks, maxMarks };
 };
-
-// PieChart component (updated)
+// PieChart component
 const PieChart: React.FC = () => {
   const [selectedClass, setSelectedClass] = useState("ClassA");
-  const [students, setStudents] = useState<Student[]>(classData[selectedClass]);
-
-  const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = e.target.value;
-    setSelectedClass(selected);
-    setStudents(classData[selected]);
-  };
+  const students = classData[selectedClass];
 
   const scoreDistribution = getScoreDistribution(students);
 
@@ -133,7 +114,7 @@ const PieChart: React.FC = () => {
         <h2 className="text-xl font-bold">Score Distribution</h2>
         <select
           value={selectedClass}
-          onChange={handleClassChange}
+          onChange={(e) => setSelectedClass(e.target.value)}
           className="p-2 border rounded"
         >
           <option value="ClassA">Class A</option>
@@ -182,7 +163,7 @@ const BarChart: React.FC = () => {
 
   return (
     <div className="p-4 bg-white shadow rounded-lg w-full">
-      <h2 className="text-xl font-bold mb-4">Class Performance Comparison</h2>
+      <h2 className="text-lg lg:text-xl font-bold mb-4">Class Performance Comparison</h2> {/* Reduce title size on mobile */}
       <Bar
         data={data}
         options={{
@@ -197,6 +178,8 @@ const BarChart: React.FC = () => {
             },
           },
         }}
+        height={300} // Adjust the height for mobile
+        className="lg:h-[400px] h-[300px]" // Increase height on larger screens
       />
     </div>
   );
@@ -205,11 +188,11 @@ const BarChart: React.FC = () => {
 // Main component
 const CombinedCharts: React.FC = () => {
   return (
-    <div className="flex space-x-4">
-      <div className="w-1/2">
+    <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
+      <div className="lg:w-1/2 w-full">
         <PieChart />
       </div>
-      <div className="w-1/2">
+      <div className="lg:w-1/2 w-full">
         <BarChart />
       </div>
     </div>
