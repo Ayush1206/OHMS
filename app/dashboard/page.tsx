@@ -2,6 +2,7 @@
 
 import { Dashboard } from "@/components";
 import { AdminDashboard } from "@/components";
+import StudentDashboard from "@/components/ui/studentDashboard.component";
 import { cookies } from "next/headers"; // Import the cookies utility
 
 export default function DashboardPage() {
@@ -20,6 +21,12 @@ export default function DashboardPage() {
     return (
       <div>
         <AdminDashboard />
+      </div>
+    );
+  } else if (role === "student") {
+    return (
+      <div>
+        <StudentDashboard />
       </div>
     );
   } else {

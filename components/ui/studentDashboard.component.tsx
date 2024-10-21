@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 
 import { Classes, ClassReport, CreateExam, LeaveApplication, MyCalendar, MySchedule, Profile, TeacherSidebar, UpdateMarks } from "../teacher";
-import { FaCheckCircle } from "react-icons/fa";
+
+import { StudentProfile, StudentSidebar } from "../student";
+import NavBar from "../common/navBar";
 import TeacherNav from "../teacher/teacherNav.component";
-import { StudentSidebar } from "../student";
 
 
 // Define the color palette based on your theme
@@ -31,31 +32,19 @@ const classes = [
 
 
 // Main dashboard component
-const Dashboard: React.FC = () => {
-  const [activeComponent, setActiveComponent] = useState<string>("calendar");
-  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
-
-
+const StudentDashboard: React.FC = () => {
+  const [activeComponent, setActiveComponent] = useState<string>("profile");
 
   // Function to render the right component based on the active state
   const renderComponent = () => {
     switch (activeComponent) {
       case "profile":
-        return <Profile />;
+        return <StudentProfile />;
       case "calendar":
         return <MyCalendar />;
       case "schedule":
         return <MySchedule />;
-      case "classes":
-        return <Classes />;
-      case "leave":
-        return <LeaveApplication />;
-      case "addExam":
-        return <CreateExam />;
-      case "updateMarks":
-        return <UpdateMarks />
-      case "examReport":
-        return <ClassReport />
+      // Add other cases as needed...
       default:
         return <Profile />;
     }
@@ -63,13 +52,17 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="flex">
-      <TeacherSidebar onSelect={setActiveComponent} />
+      {/* Sidebar */}
+      <StudentSidebar onSelect={setActiveComponent} />
+
+      {/* Main Content Area */}
       <div
-        className="ml-[10%] md:ml-[15%] w-[90%] md:w-[85%] h-full"
+        className={`ml-[8%] md:ml-[5%] w-[92%] md:w-[95%]`}
+        //className="ml-[10%] md:ml-[15%] w-[90%] md:w-[85%] h-full"
         style={{ backgroundColor: COLORS.porcelain }}
       >
         {/* Fixed Navbar */}
-        <TeacherNav />
+        <NavBar />
 
         {/* Content Area */}
         <div className="pt-20 p-6" style={{ backgroundColor: COLORS.porcelain }}>
@@ -80,4 +73,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default StudentDashboard;

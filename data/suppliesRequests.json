@@ -2,7 +2,7 @@
   {
     "id": 1,
     "timestamp": "2024-09-18T16:45:45.755Z",
-    "status": "pending",
+    "status": "Rejected",
     "requested_by": "teacher",
     "category": "Library",
     "itemName": "Math by RD sharma",
@@ -28,5 +28,15 @@
     "itemName": "Bat",
     "quantity": "3",
     "reason": "random"
+  },
+  {
+    "id": 4,
+    "timestamp": "2024-10-02T13:17:35.429Z",
+    "status": "Rejected",
+    "requested_by": "teacher",
+    "category": "Classroom Essentials",
+    "itemName": "duster",
+    "quantity": "8",
+    "reason": "Ajeet mange"
   }
 ]
